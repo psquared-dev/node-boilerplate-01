@@ -1,5 +1,8 @@
 import express, { json, urlencoded } from "express";
 import { sequelize } from "./integrations/datastore.js";
+import getLogger from "./integrations/winston.js";
+
+const logger = getLogger("app.js");
 
 class Microservice {
 	constructor() {
@@ -18,7 +21,7 @@ class Microservice {
 
 	listen(port) {
 		this.app.listen(port, (error) => {
-			console.log(`Server running on port ${port}`);
+			logger.info(`Server running on port ${port}`);
 		});
 	}
 
@@ -26,9 +29,9 @@ class Microservice {
 		try {
 			await sequelize.authenticate();
 			await sequelize.sync();
-			console.log("Database connected");
+			logger.info("Database connected.");
 		} catch (error) {
-			console.log(error);
+			logger.error(error.message);
 		}
 	}
 
@@ -45,7 +48,7 @@ class Microservice {
 			await this.initDb();
 			this.listen(port);
 		} catch (error) {
-			console.log("error");
+			logger.error("Error starting application.");
 		}
 	}
 }

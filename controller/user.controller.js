@@ -1,5 +1,6 @@
 import UserModel from "../models/user.model.js";
 import UserService from "../service/user.service.js";
+import loginSchema from "../validations/login.schema.js";
 
 export default class UserController {
 	constructor() {

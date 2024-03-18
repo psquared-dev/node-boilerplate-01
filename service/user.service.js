@@ -1,14 +1,12 @@
 import UserModel from "../models/user.model.js";
-import UserRepository from "../repository/user.repo.js";
 import jwt from "jsonwebtoken";
 
 export default class UserService {
 	constructor() {
-		this.userRepository = new UserRepository();
+		// this.userRepository = new UserRepository();
 	}
 
 	async getLoggedInUserDetails(userId) {
-		console.log({ userId });
 		try {
 			const user = await UserModel.findOne({
 				where: {
@@ -64,15 +62,15 @@ export default class UserService {
 		});
 	}
 
-	async findAll() {
-		return await this.userRepository.findAll();
-	}
+	// async findAll() {
+	// 	return await this.userRepository.findAll();
+	// }
 
-	async findById(id) {
-		return await this.userRepository.findById(id);
-	}
+	// async findById(id) {
+	// 	return await this.userRepository.findById(id);
+	// }
 
-	async deleteById(id) {
-		return await this.userRepository.deleteById(id);
-	}
+	// async deleteById(id) {
+	// 	return await this.userRepository.deleteById(id);
+	// }
 }
